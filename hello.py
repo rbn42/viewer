@@ -91,9 +91,18 @@ class Viewer:
         sys.exit()
 
 app = QApplication(sys.argv)
-window = QLabel("aasfd")
+window = QMainWindow(parent=None,
+                     # flags=Qt.FramelessWindowHint
+                     )
+window.setWindowTitle("myviewer")
 window.resize(800, 600)
+
+label = QLabel("aasfd", window)
+window.setCentralWidget(label)
+
 window.show()
+
+
 path = sys.argv[1]
-viewer = Viewer(window, path)
+viewer = Viewer(label, path)
 viewer.quit()
