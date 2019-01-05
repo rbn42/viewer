@@ -1,16 +1,17 @@
 #!/usr/bin/python
 import sys
 import os.path
-from PySide.QtCore import *
-from PySide.QtGui import *
-import PySide
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+import PySide2
 
 EXT = "jpg", "png", "bmp", "gif"
 
 
 def bind(key, fun, window):
     print('bind:%s' % key)
-    shortcut = PySide.QtGui.QShortcut(window)
+    shortcut = QShortcut(window)
     shortcut.setKey(key)
     shortcut.activated.connect(fun)
 
@@ -63,7 +64,7 @@ class Viewer:
         w = window.size().width()
         reader = QImageReader(path)  # , format="jpg")
         for _format in EXT:
-            reader.setFormat(_format)
+            reader.setFormat(_format.encode())
             image = reader.read()
             if not None == image:
                 break
